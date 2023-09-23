@@ -1,0 +1,40 @@
+{
+    "pokemon_data": {
+        "0001": {
+            "name": "フシギダネ",
+            "url": "https://pokemongo.gamewith.jp/article/show/25216",
+            "data": [
+                [
+                    "つるのムチ"
+                ],
+                [
+                    "たいあたり"
+                ]
+            ]
+        },
+        "0002": {
+            "name": "フシギソウ",
+            "url": "https://pokemongo.gamewith.jp/article/show/25217",
+            "data": [
+                [
+                    "はっぱカッター"
+                ],
+                [
+                    "つるのムチ"
+                ]
+            ]
+        },
+        "0003": {
+            "name": "メガフシギバナ",
+            "url": "https://pokemongo.gamewith.jp/article/show/223895",
+            "data": [
+                [
+                    "はっぱカッター"
+                ],
+                [
+                    "つるのムチ"
+                ]
+            ]
+        }
+    }
+}
