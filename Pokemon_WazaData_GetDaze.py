@@ -15,14 +15,13 @@ for pokemon_id, pokemon_info in data['pokemon_data'].items():
     rows = table.find_all('tr')[1:]
     pokemon_data = []
     for row in rows:
+        data_row = list()
         columns = row.find_all('td')
-        data_row = []
         for column in columns:
             a_tag = column.find('a')
             if a_tag:
-                data_row.append(a_tag.text.strip())
-        pokemon_data.append(data_row)
-    pokemon_info['data'] = pokemon_data
+                pokemon_data.append(a_tag.text)
+    pokemon_info['waza'] = pokemon_data
 
 # 更新されたデータをpokemon_data.jsonに保存
 with open('pokemon_data_test.json', 'w', encoding='utf-8') as f:
