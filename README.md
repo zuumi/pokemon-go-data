@@ -1,7 +1,16 @@
 # pokemon-go-data
-Data of PokemonGO For PvP
 
-## 前提
+ポケモンGOの各種データを取得するための処理を集めたレポジトリ．
+
+## メインファイルの説明
+
+* WazaScraping.py：わざ1わざ2に関するデータを取得する
+* PokemonLinkScraping.py：各ポケモンの詳細がわかるURLを集めたデータを取得する
+* Pokemon_WazaData_GetDaze.py：各ポケモン詳細URLデータから，各ポケモンの覚える技データを取得する
+
+## 環境構築
+
+### 前提
 
 ```sh
 $ sw_vers
@@ -11,8 +20,6 @@ BuildVersion:		22G90
 $ python3 -V
 Python 3.11.4
 ```
-
-## 環境構築
 
 ```python
 $python3 -m venv .venv
@@ -30,3 +37,4 @@ https://www.aconvert.com/jp/document/csv-to-json/
 
 * ノーマルわざ：「No,わざ,タイプ,威力,エネルギー充填,秒数,ダメージ発生時間(秒):開始,ダメージ発生時間(秒):終了,威力,PvPエネルギー充填,ターン数」
 * スペシャルわざ：「No,わざ,タイプ,威力,エネルギー充填,秒数,ダメージ発生時間(秒):開始,ダメージ発生時間(秒):終了,威力,PvPエネルギー充填,追加効果,発生確率」
+
