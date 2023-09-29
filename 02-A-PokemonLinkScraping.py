@@ -23,18 +23,15 @@ pokemon_data = {}
 
 # テーブル内のデータを取得する
 for row in table.find_all('tr'):
+		pokemon_name = row.get('data-col1')
 		div = row.find('div')
 		if div is None:
 			continue
 
 		pokemon_id = div['id']
-		pokemon_name = div.text
 		pokemon_url = div.find('a')['href']
 
-		if pokemon_id in pokemon_data:
-			continue
-	
-		pokemon_data[pokemon_id] = {'name': pokemon_name, 'url': pokemon_url}
+		pokemon_data[pokemon_name] = {'numbering': pokemon_id, 'name':pokemon_name, 'url': pokemon_url}
 
 data = {SAVE_JSON: pokemon_data}
 
