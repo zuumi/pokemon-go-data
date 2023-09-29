@@ -2,7 +2,11 @@ import requests
 from bs4 import BeautifulSoup
 import json
 
-with open('pokemon_data.json', 'r', encoding='utf-8') as f:
+STAGING_JSON = 'pokemon_data.json'
+PRODUCTION_JSON = 'pokemon_data.json'
+SAVE_JSON = PRODUCTION_JSON
+
+with open(SAVE_JSON, 'r', encoding='utf-8') as f:
     data = json.load(f)
 
 # 各ポケモンのURLからデータを取得して追加
@@ -11,6 +15,8 @@ for pokemon_id, pokemon_info in data['pokemon_data'].items():
     response = requests.get(url)
     html = response.text
     soup = BeautifulSoup(html, 'html.parser')
+    if soup.find('div', class_='pgo_hyouka_waza').find('table'):
+        continue
     table = soup.find('div', class_='pgo_hyouka_waza').find('table')
     rows = table.find_all('tr')[1:]
     pokemon_data = []
@@ -24,7 +30,7 @@ for pokemon_id, pokemon_info in data['pokemon_data'].items():
     pokemon_info['waza'] = pokemon_data
 
 # 更新されたデータをpokemon_data.jsonに保存
-with open('pokemon_data.json', 'w', encoding='utf-8') as f:
+with open(SAVE_JSON, 'w', encoding='utf-8') as f:
     json.dump(data, f, ensure_ascii=False, indent=4)
 
 print("JSONファイルに出力しました。")
