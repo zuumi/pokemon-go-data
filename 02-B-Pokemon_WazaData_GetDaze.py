@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import json
 
-with open('pokemon_data_test.json', 'r', encoding='utf-8') as f:
+with open('pokemon_data.json', 'r', encoding='utf-8') as f:
     data = json.load(f)
 
 # 各ポケモンのURLからデータを取得して追加
@@ -24,7 +24,7 @@ for pokemon_id, pokemon_info in data['pokemon_data'].items():
     pokemon_info['waza'] = pokemon_data
 
 # 更新されたデータをpokemon_data.jsonに保存
-with open('pokemon_data_test.json', 'w', encoding='utf-8') as f:
+with open('pokemon_data.json', 'w', encoding='utf-8') as f:
     json.dump(data, f, ensure_ascii=False, indent=4)
 
 print("JSONファイルに出力しました。")
