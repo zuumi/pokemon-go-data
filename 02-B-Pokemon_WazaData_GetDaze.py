@@ -11,23 +11,26 @@ with open(SAVE_JSON, 'r', encoding='utf-8') as f:
 
 # 各ポケモンのURLからデータを取得して追加
 for pokemon_id, pokemon_info in data['pokemon_data'].items():
-    url = pokemon_info['url']
-    response = requests.get(url)
-    html = response.text
-    soup = BeautifulSoup(html, 'html.parser')
-    if soup.find('div', class_='pgo_hyouka_waza').find('table'):
+    try:
+        url = pokemon_info['url']
+        response = requests.get(url)
+        html = response.text
+        soup = BeautifulSoup(html, 'html.parser')
+        table = soup.find('div', class_='pgo_hyouka_waza').find('table')
+        rows = table.find_all('tr')[1:]
+        pokemon_data = []
+        for row in rows:
+            data_row = list()
+            columns = row.find_all('td')
+            for column in columns:
+                a_tag = column.find('a')
+                if a_tag:
+                    pokemon_data.append(a_tag.text)
+        pokemon_info['waza'] = pokemon_data
+    except AttributeError:
+        pokemon_info['waza'] = []
         continue
-    table = soup.find('div', class_='pgo_hyouka_waza').find('table')
-    rows = table.find_all('tr')[1:]
-    pokemon_data = []
-    for row in rows:
-        data_row = list()
-        columns = row.find_all('td')
-        for column in columns:
-            a_tag = column.find('a')
-            if a_tag:
-                pokemon_data.append(a_tag.text)
-    pokemon_info['waza'] = pokemon_data
+
 
 # 更新されたデータをpokemon_data.jsonに保存
 with open(SAVE_JSON, 'w', encoding='utf-8') as f:
