@@ -5,6 +5,9 @@ import json
 # 取得したいデータの掲載先
 url = "https://pokemongo.gamewith.jp/article/show/35502"
 
+# 取得したいデータ
+SAVE_JSON = 'pokemon_data_test.json'
+
 # Responseオブジェクト生成
 response = requests.get(url)
 
@@ -21,15 +24,21 @@ pokemon_data = {}
 # テーブル内のデータを取得する
 for row in table.find_all('tr'):
 		div = row.find('div')
-		if div:
-			pokemon_id = div['id']
-			pokemon_name = div.text
-			pokemon_url = div.find('a')['href']
-			pokemon_data[pokemon_id] = {'name': pokemon_name, 'url': pokemon_url}
+		if div is None:
+			continue
 
-data = {'pokemon_data': pokemon_data}
+		pokemon_id = div['id']
+		pokemon_name = div.text
+		pokemon_url = div.find('a')['href']
 
-with open('pokemon_data.json', 'w', encoding='utf-8') as f:
+		if pokemon_id in pokemon_data:
+			continue
+	
+		pokemon_data[pokemon_id] = {'name': pokemon_name, 'url': pokemon_url}
+
+data = {SAVE_JSON: pokemon_data}
+
+with open( SAVE_JSON, 'w', encoding='utf-8') as f:
 	json.dump(data, f, ensure_ascii=False, indent=4)
 
 print("JSONファイルに出力しました。")
