@@ -6,7 +6,7 @@ import json
 url = "https://pokemongo.gamewith.jp/article/show/35502"
 
 # 取得したデータの保存先。↓を変更することで検証を切り替える。
-SAVE_JSON = 'pokemon_data.json'
+SAVE_JSON = 'pokemon_data'
 
 # Responseオブジェクト生成
 response = requests.get(url)

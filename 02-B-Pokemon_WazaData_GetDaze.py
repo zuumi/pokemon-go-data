@@ -10,7 +10,7 @@ with open(SAVE_JSON, 'r', encoding='utf-8') as f:
     data = json.load(f)
 
 # 各ポケモンのURLからデータを取得して追加
-for pokemon_id, pokemon_info in data['pokemon_data'].items():
+for pokemon_id, pokemon_info in data['pokemon_data.json'].items():
     try:
         url = pokemon_info['url']
         response = requests.get(url)
